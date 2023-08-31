@@ -6,18 +6,32 @@ if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('news')) {
     $configuration
         ->addField(
             (new \StudioMitte\LiveSearchExtended\Configuration\Field('datetime', 'actions-clock'))
-                ->skipIfEmpty()
-                ->skipPrefixLabel()
+                ->setSkipIfEmpty(true)
+                ->setPrefixLabel(false)
         )
         ->addField(
             (new \StudioMitte\LiveSearchExtended\Configuration\Field('teaser', 'actions-document'))
-                ->skipIfEmpty()
-                ->skipPrefixLabel()
+                ->setSkipIfEmpty(true)
+                ->setPrefixLabel(false)
         )
         ->addField(
             (new \StudioMitte\LiveSearchExtended\Configuration\Field('author', 'actions-user'))
-                ->skipIfEmpty()
-                ->skipPrefixLabel()
+                ->setSkipIfEmpty(true)
+                ->setPrefixLabel(false)
+        )
+        ->persist();
+}
+
+if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('tt_address')) {
+    $configuration = new \StudioMitte\LiveSearchExtended\Configuration\Table('tt_address');
+    $configuration
+        ->addField(
+            (new \StudioMitte\LiveSearchExtended\Configuration\Field('first_name', 'actions-user'))
+                ->setSkipIfEmpty(true)
+        )
+        ->addField(
+            (new \StudioMitte\LiveSearchExtended\Configuration\Field('last_name', 'actions-user'))
+                ->setSkipIfEmpty(true)
         )
         ->persist();
 }

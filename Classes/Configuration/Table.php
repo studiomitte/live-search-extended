@@ -27,11 +27,11 @@ class Table
         $table = new self($tableName);
         foreach ($config['fields'] ?? [] as $field => $fieldConfiguration) {
             $field = new Field($field, $fieldConfiguration['icon'] ?? '');
-            if ($fieldConfiguration['skipIfEmpty'] ?? true) {
-                $field->skipIfEmpty();
+            if (isset($fieldConfiguration['skipIfEmpty'])) {
+                $field->setSkipIfEmpty($fieldConfiguration['skipIfEmpty']);
             }
-            if ($fieldConfiguration['prefixLabel'] ?? true) {
-                $field->skipPrefixLabel();
+            if (isset($fieldConfiguration['prefixLabel'])) {
+                $field->setPrefixLabel($fieldConfiguration['prefixLabel']);
             }
             $table->addField($field);
         }

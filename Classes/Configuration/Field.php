@@ -26,25 +26,28 @@ class Field
         ];
     }
 
+    /**
+     * @return bool
+     */
     public function isSkipIfEmpty(): bool
     {
         return $this->skipIfEmpty;
     }
 
-    public function skipIfEmpty(): Field
+    public function setSkipIfEmpty(bool $skipIfEmpty): Field
     {
-        $this->skipIfEmpty = true;
+        $this->skipIfEmpty = $skipIfEmpty;
         return $this;
     }
 
-    public function usePrefixLabel(): bool
+    public function isPrefixLabel(): bool
     {
         return $this->prefixLabel;
     }
 
-    public function skipPrefixLabel(): Field
+    public function setPrefixLabel(bool $prefixLabel): Field
     {
-        $this->prefixLabel = false;
+        $this->prefixLabel = $prefixLabel;
         return $this;
     }
 

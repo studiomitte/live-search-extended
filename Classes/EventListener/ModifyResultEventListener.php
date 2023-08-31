@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 namespace StudioMitte\LiveSearchExtended\EventListener;
 
 use StudioMitte\LiveSearchExtended\Configuration\Table;
@@ -43,17 +44,19 @@ final class ModifyResultEventListener
             }
 
             foreach ($searchConfiguration->getFields() as $field) {
+                if (!isset($row[$field->field])) {
+                    continue;
+                }
                 $content = BackendUtility::getProcessedValue($table, $field->field, $row[$field->field]);
-                if (!$content && $field->skipIfEmpty()) {
+                if (!$content && $field->isSkipIfEmpty()) {
                     continue;
                 }
                 $label = $this->languageService->sL(BackendUtility::getItemLabel($table, $field->field));
-                $text = $field->usePrefixLabel() ? sprintf('%s: %s', $label, $content) : $content;
+                $text = $field->isPrefixLabel() ? sprintf('%s: %s', $label, $content) : $content;
                 $action = (new ResultItemAction($table . '_' . $field->field))
                     ->setLabel($text)
                     ->setIcon($field->icon ? $this->iconFactory->getIcon($field->icon, Icon::SIZE_SMALL) : null);
                 $resultItem->addAction($action);
-
             }
         }
     }
