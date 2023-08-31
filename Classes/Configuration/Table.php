@@ -10,6 +10,7 @@ class Table
      * @var Field[]
      */
     protected array $fields = [];
+    protected bool $useNotesField = true;
 
     public function __construct(
         public readonly string $table
@@ -21,10 +22,9 @@ class Table
     public static function createFromTCA(string $tableName): ?Table
     {
         $config = $GLOBALS['TCA'][$tableName]['ctrl']['live_search_extended'] ?? [];
-        if (empty($config)) {
-            return null;
-        }
+
         $table = new self($tableName);
+        $table->setUseNotesField($config['useNotesField'] ?? true);
         foreach ($config['fields'] ?? [] as $field => $fieldConfiguration) {
             $field = new Field($field, $fieldConfiguration['icon'] ?? '');
             if (isset($fieldConfiguration['skipIfEmpty'])) {
@@ -48,9 +48,29 @@ class Table
 
     public function addField(Field $field): Table
     {
-        $this->fields[] = $field;
+        $this->fields[$field->field] = $field;
         return $this;
     }
+
+    /**
+     * @return bool
+     */
+    public function getUseNotesField(): bool
+    {
+        return $this->useNotesField;
+    }
+
+    /**
+     * @param bool $useNotesField
+     * @return Table
+     */
+    public function setUseNotesField(bool $useNotesField): Table
+    {
+        $this->useNotesField = $useNotesField;
+        return $this;
+    }
+
+
 
     public function persist(): void
     {
@@ -62,13 +82,14 @@ class Table
             $fieldData[$field->field] = $field->getConfiguration();
         }
         $GLOBALS['TCA'][$this->table]['ctrl']['live_search_extended'] = [
+            'useNotesField' => $this->useNotesField,
             'fields' => $fieldData,
         ];
     }
 
     public function isValid(): bool
     {
-        return isset($GLOBALS['TCA'][$this->table]) && !empty($this->fields);
+        return isset($GLOBALS['TCA'][$this->table]);
     }
 
 }

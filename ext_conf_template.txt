@@ -1,0 +1,3 @@
+
+# cat=backend module/enable/12; type=boolean; label=Load example configuration
+examples = 1

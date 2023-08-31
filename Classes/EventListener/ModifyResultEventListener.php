@@ -31,7 +31,7 @@ final class ModifyResultEventListener
     public function __invoke(ModifyResultItemInLiveSearchEvent $event): void
     {
         $resultItem = $event->getResultItem();
-        if (!in_array($resultItem->getProviderClassName(), [DatabaseRecordProvider::class, NewsDatabaseRecordProvider::class], true)) {
+        if (!in_array($resultItem->getProviderClassName(), [DatabaseRecordProvider::class], true)) {
             return;
         }
 
@@ -56,6 +56,16 @@ final class ModifyResultEventListener
                 $action = (new ResultItemAction($table . '_' . $field->field))
                     ->setLabel($text)
                     ->setIcon($field->icon ? $this->iconFactory->getIcon($field->icon, Icon::SIZE_SMALL) : null);
+                $resultItem->addAction($action);
+            }
+
+            $notesField = $GLOBALS['TCA'][$table]['ctrl']['descriptionColumn'] ?? null;
+            if ($notesField && ($row[$notesField] ?? false) && $searchConfiguration->getUseNotesField()) {
+                $content = BackendUtility::getProcessedValue($table, $notesField, $row[$notesField]);
+
+                $action = (new ResultItemAction($table . '_descriptionColumn'))
+                    ->setLabel($content)
+                    ->setIcon($this->iconFactory->getIcon('actions-notebook', Icon::SIZE_SMALL));
                 $resultItem->addAction($action);
             }
         }
