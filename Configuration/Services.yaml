@@ -12,7 +12,3 @@ services:
       - name: event.listener
         identifier: 'live-search-extended-modfy-resultitem'
         event: TYPO3\CMS\Backend\Search\Event\ModifyResultItemInLiveSearchEvent
-
-  StudioMitte\LiveSearchExtended\LiveSearch\NewsDatabaseRecordProvider:
-    tags:
-      - { name: 'livesearch.provider', priority: 70 }
