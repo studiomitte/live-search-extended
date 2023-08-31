@@ -1,5 +1,31 @@
 <?php
 
+$configuration = new \StudioMitte\LiveSearchExtended\Configuration\Table('be_users');
+$configuration
+    ->addField(
+        (new \StudioMitte\LiveSearchExtended\Configuration\Field('realName', 'actions-user'))
+            ->setSkipIfEmpty(true)
+            ->setPrefixLabel(false)
+    )
+    ->addField(
+        (new \StudioMitte\LiveSearchExtended\Configuration\Field('email', 'actions-envelope'))
+            ->setSkipIfEmpty(true)
+            ->setPrefixLabel(false)
+    )
+    ->addField(
+        (new \StudioMitte\LiveSearchExtended\Configuration\Field('usergroup', 'status-user-group-backend'))
+            ->setSkipIfEmpty(true)
+    )
+    ->persist();
+
+
+$configuration = new \StudioMitte\LiveSearchExtended\Configuration\Table('tt_content');
+$configuration
+    ->addField(
+        (new \StudioMitte\LiveSearchExtended\Configuration\Field('subheader'))
+            ->setSkipIfEmpty(true)
+    )
+    ->persist();
 
 if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('news')) {
     $configuration = new \StudioMitte\LiveSearchExtended\Configuration\Table('tx_news_domain_model_news');

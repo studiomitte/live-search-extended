@@ -47,7 +47,7 @@ final class ModifyResultEventListener
                 if (!isset($row[$field->field])) {
                     continue;
                 }
-                $content = BackendUtility::getProcessedValue($table, $field->field, $row[$field->field]);
+                $content = BackendUtility::getProcessedValue($table, $field->field, $row[$field->field], 0, false, false, $row['uid']);
                 if (!$content && $field->isSkipIfEmpty()) {
                     continue;
                 }
