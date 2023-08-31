@@ -1,0 +1,34 @@
+{
+  "name": "studiomitte/live-search-extended",
+  "type": "typo3-cms-extension",
+  "description": "Improved backend search for v12",
+  "keywords": [
+    "TYPO3",
+    "extension",
+    "backend",
+    "search"
+  ],
+  "authors": [
+    {
+      "name": "Georg Ringer",
+      "email": "gr@studiomitte.com",
+      "role": "Developer"
+    }
+  ],
+  "license": [
+    "GPL-2.0-or-later"
+  ],
+  "require": {
+    "typo3/cms-core": "^12"
+  },
+  "autoload": {
+    "psr-4": {
+      "StudioMitte\\LiveSearchExtended\\": "Classes/"
+    }
+  },
+  "extra": {
+    "typo3/cms": {
+      "extension-key": "live_search_extended"
+    }
+  }
+}

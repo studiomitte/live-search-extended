@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns:t3="http://typo3.org/schemas/xliff" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file source-language="en" target-language="de" original="" datatype="plaintext" date="2023-08-28T20:12:42+02:00">
+		<body>
+			<trans-unit id="liveSearch.newsRecordProvider.filterLabel" resname="liveSearch.newsRecordProvider.filterLabel">
+				<source>News</source>
+				<target>News</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
