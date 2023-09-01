@@ -29,6 +29,16 @@ if ($extensionConfiguration) {
             'root' => [
                 'icon' => 'actions-check-circle',
             ],
+            '_count_config' => [
+                'icon' => 'form-number',
+                'label' => 'Count Setup',
+                'skipIfEmpty' => false
+            ],
+            '_count_constants' => [
+                'icon' => 'form-number',
+                'label' => 'Count Constants',
+                'skipIfEmpty' => false
+            ],
         ],
     ];
 

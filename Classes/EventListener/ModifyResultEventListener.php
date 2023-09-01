@@ -3,8 +3,9 @@ declare(strict_types=1);
 
 namespace StudioMitte\LiveSearchExtended\EventListener;
 
+use Psr\EventDispatcher\EventDispatcherInterface;
 use StudioMitte\LiveSearchExtended\Configuration\Table;
-use StudioMitte\LiveSearchExtended\LiveSearch\NewsDatabaseRecordProvider;
+use StudioMitte\LiveSearchExtended\Event\ModifyRowEvent;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Search\Event\ModifyResultItemInLiveSearchEvent;
 use TYPO3\CMS\Backend\Search\LiveSearch\DatabaseRecordProvider;
@@ -14,12 +15,14 @@ use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
+use TYPO3\CMS\Extbase\Event\Mvc\BeforeActionCallEvent;
 
 final class ModifyResultEventListener
 {
     protected LanguageService $languageService;
 
     public function __construct(
+        protected readonly EventDispatcherInterface $eventDispatcher,
         protected readonly IconFactory $iconFactory,
         protected readonly LanguageServiceFactory $languageServiceFactory,
         protected readonly UriBuilder $uriBuilder
@@ -43,16 +46,25 @@ final class ModifyResultEventListener
             return;
         }
 
+        $rowEvent = $this->eventDispatcher->dispatch(new ModifyRowEvent($table, $row));
+        $row = $rowEvent->getRow();
+
         if ($searchConfiguration && $searchConfiguration->isValid()) {
             foreach ($searchConfiguration->getFields() as $field) {
                 if (!isset($row[$field->field])) {
                     continue;
                 }
-                $content = BackendUtility::getProcessedValue($table, $field->field, $row[$field->field], 0, false, false, $row['uid']);
+
+                if (isset($GLOBALS['TCA'][$table]['columns'][$field->field])) {
+                    $label = $this->languageService->sL(BackendUtility::getItemLabel($table, $field->field));
+                    $content = BackendUtility::getProcessedValue($table, $field->field, $row[$field->field], 0, false, false, $row['uid']);
+                } else {
+                    $label = $this->languageService->sL($field->getLabel());
+                    $content = $row[$field->field];
+                }
                 if (!$content && $field->isSkipIfEmpty()) {
                     continue;
                 }
-                $label = $this->languageService->sL(BackendUtility::getItemLabel($table, $field->field));
                 $text = $field->isPrefixLabel() ? sprintf('%s: %s', $label, $content) : $content;
                 $action = (new ResultItemAction($table . '_' . $field->field))
                     ->setLabel($text)

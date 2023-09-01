@@ -8,6 +8,7 @@ class Field
 
     protected bool $skipIfEmpty = false;
     protected bool $prefixLabel = true;
+    protected string $label = '';
 
     public function __construct(
         public readonly string $field,
@@ -23,7 +24,19 @@ class Field
             'icon' => $this->icon,
             'skipIfEmpty' => $this->skipIfEmpty,
             'prefixLabel' => $this->prefixLabel,
+            'label' => $this->label,
         ];
+    }
+
+    public function setConfiguration(array $configuration): void
+    {
+        if (isset($configuration['skipIfEmpty'])) {
+            $this->setSkipIfEmpty($configuration['skipIfEmpty']);
+        }
+        if (isset($configuration['prefixLabel'])) {
+            $this->setPrefixLabel($configuration['prefixLabel']);
+        }
+        $this->setLabel($configuration['label'] ?? '');
     }
 
     /**
@@ -51,6 +64,16 @@ class Field
         return $this;
     }
 
+    public function getLabel(): string
+    {
+        return $this->label;
+    }
+
+    public function setLabel(string $label): Field
+    {
+        $this->label = $label;
+        return $this;
+    }
 
 
 }

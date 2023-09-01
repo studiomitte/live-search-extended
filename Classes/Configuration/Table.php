@@ -16,7 +16,6 @@ class Table
         public readonly string $table
     )
     {
-
     }
 
     public static function createFromTCA(string $tableName): ?Table
@@ -27,12 +26,7 @@ class Table
         $table->setUseNotesField($config['useNotesField'] ?? true);
         foreach ($config['fields'] ?? [] as $field => $fieldConfiguration) {
             $field = new Field($field, $fieldConfiguration['icon'] ?? '');
-            if (isset($fieldConfiguration['skipIfEmpty'])) {
-                $field->setSkipIfEmpty($fieldConfiguration['skipIfEmpty']);
-            }
-            if (isset($fieldConfiguration['prefixLabel'])) {
-                $field->setPrefixLabel($fieldConfiguration['prefixLabel']);
-            }
+            $field->setConfiguration($fieldConfiguration);
             $table->addField($field);
         }
         return $table;
@@ -69,7 +63,6 @@ class Table
         $this->useNotesField = $useNotesField;
         return $this;
     }
-
 
 
     public function persist(): void

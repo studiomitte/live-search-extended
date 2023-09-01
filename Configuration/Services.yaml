@@ -10,5 +10,11 @@ services:
   StudioMitte\LiveSearchExtended\EventListener\ModifyResultEventListener:
     tags:
       - name: event.listener
-        identifier: 'live-search-extended-modfy-resultitem'
+        identifier: 'live-search-extended-modify-resultitem'
         event: TYPO3\CMS\Backend\Search\Event\ModifyResultItemInLiveSearchEvent
+
+  StudioMitte\LiveSearchExtended\EventListener\RowModification\SysTemplateRowModificationEventListener:
+    tags:
+      - name: event.listener
+        identifier: 'live-search-extended-modify-systemplate'
+        event: StudioMitte\LiveSearchExtended\Event\ModifyRowEvent
