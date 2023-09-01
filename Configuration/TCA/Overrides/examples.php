@@ -3,6 +3,8 @@
 
 $extensionConfiguration = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)->get('live_search_extended', 'examples');
 if ($extensionConfiguration) {
+
+    // be_users
     $configuration = new \StudioMitte\LiveSearchExtended\Configuration\Table('be_users');
     $configuration
         ->addField(
@@ -21,6 +23,25 @@ if ($extensionConfiguration) {
         )
         ->persist();
 
+    // sys_template
+    $GLOBALS['TCA']['sys_template']['ctrl']['live_search_extended'] = [
+        'fields' => [
+            'root' => [
+                'icon' => 'actions-check-circle',
+            ],
+        ],
+    ];
+
+    // sys_category
+    $GLOBALS['TCA']['sys_category']['ctrl']['live_search_extended'] = [
+        'fields' => [
+            'parent' => [
+                'icon' => 'mimetypes-x-sys_category',
+            ],
+        ],
+    ];
+
+    // tt_content
     $configuration = new \StudioMitte\LiveSearchExtended\Configuration\Table('tt_content');
     $configuration
         ->addField(
@@ -29,7 +50,9 @@ if ($extensionConfiguration) {
         )
         ->persist();
 
+    // EXT:news
     if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('news')) {
+        // tx_news_domain_model_news
         $configuration = new \StudioMitte\LiveSearchExtended\Configuration\Table('tx_news_domain_model_news');
         $configuration
             ->addField(
@@ -50,7 +73,9 @@ if ($extensionConfiguration) {
             ->persist();
     }
 
+    // EXT:tt_address
     if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('tt_address')) {
+        // tt_address
         $configuration = new \StudioMitte\LiveSearchExtended\Configuration\Table('tt_address');
         $configuration
             ->addField(

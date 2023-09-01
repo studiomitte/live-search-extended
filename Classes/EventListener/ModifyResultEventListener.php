@@ -37,12 +37,13 @@ final class ModifyResultEventListener
 
         $table = $resultItem->getExtraData()['table'] ?? null;
         $searchConfiguration = Table::createFromTCA($table);
-        if ($searchConfiguration && $searchConfiguration->isValid()) {
-            $row = $resultItem->getInternalData()['row'] ?? null;
-            if (!$row) {
-                return;
-            }
 
+        $row = $resultItem->getInternalData()['row'] ?? null;
+        if (!$row) {
+            return;
+        }
+
+        if ($searchConfiguration && $searchConfiguration->isValid()) {
             foreach ($searchConfiguration->getFields() as $field) {
                 if (!isset($row[$field->field])) {
                     continue;
@@ -67,6 +68,12 @@ final class ModifyResultEventListener
                     ->setLabel($content)
                     ->setIcon($this->iconFactory->getIcon('actions-notebook', Icon::SIZE_SMALL));
                 $resultItem->addAction($action);
+            }
+
+            // add ID to title
+            $currentTitle = $resultItem->jsonSerialize()['itemTitle'] ?? false;
+            if ($currentTitle) {
+                $resultItem->setItemTitle(sprintf('%s [%s]', $currentTitle, $row['uid']));
             }
         }
     }
