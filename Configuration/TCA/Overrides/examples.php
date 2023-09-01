@@ -18,6 +18,33 @@ if ($extensionConfiguration) {
                 ->setPrefixLabel(false)
         )
         ->addField(
+            (new \StudioMitte\LiveSearchExtended\Configuration\Field('lastlogin', 'actions-clock'))
+        )
+        ->addField(
+            (new \StudioMitte\LiveSearchExtended\Configuration\Field('usergroup', 'status-user-group-backend'))
+                ->setSkipIfEmpty(true)
+        )
+        ->persist();
+
+    // fe_users
+    $configuration = new \StudioMitte\LiveSearchExtended\Configuration\Table('fe_users');
+    $configuration
+        ->addField(
+            (new \StudioMitte\LiveSearchExtended\Configuration\Field('first_name', 'actions-user'))
+                ->setSkipIfEmpty(true)
+        )
+        ->addField(
+            (new \StudioMitte\LiveSearchExtended\Configuration\Field('last_name', 'actions-user'))
+                ->setSkipIfEmpty(true)
+        )
+        ->addField(
+            (new \StudioMitte\LiveSearchExtended\Configuration\Field('email', 'actions-envelope'))
+                ->setSkipIfEmpty(true)
+        )
+        ->addField(
+            (new \StudioMitte\LiveSearchExtended\Configuration\Field('lastlogin', 'actions-clock'))
+        )
+        ->addField(
             (new \StudioMitte\LiveSearchExtended\Configuration\Field('usergroup', 'status-user-group-backend'))
                 ->setSkipIfEmpty(true)
         )
@@ -32,12 +59,12 @@ if ($extensionConfiguration) {
             '_count_config' => [
                 'icon' => 'form-number',
                 'label' => 'Count Setup',
-                'skipIfEmpty' => false
+                'skipIfEmpty' => false,
             ],
             '_count_constants' => [
                 'icon' => 'form-number',
                 'label' => 'Count Constants',
-                'skipIfEmpty' => false
+                'skipIfEmpty' => false,
             ],
         ],
     ];
