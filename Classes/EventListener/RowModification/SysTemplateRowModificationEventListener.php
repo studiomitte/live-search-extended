@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace StudioMitte\LiveSearchExtended\EventListener\RowModification;
 
@@ -7,7 +8,7 @@ use StudioMitte\LiveSearchExtended\Event\ModifyRowEvent;
 final class SysTemplateRowModificationEventListener
 {
 
-    public function __invoke(ModifyRowEvent $event)
+    public function __invoke(ModifyRowEvent $event): void
     {
         if ($event->tableName === 'sys_template') {
             $row = $event->getRow();

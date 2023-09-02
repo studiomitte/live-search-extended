@@ -19,6 +19,7 @@ if ($extensionConfiguration) {
         )
         ->addField(
             (new \StudioMitte\LiveSearchExtended\Configuration\Field('lastlogin', 'actions-clock'))
+                ->setSkipIfEmpty(true)
         )
         ->addField(
             (new \StudioMitte\LiveSearchExtended\Configuration\Field('usergroup', 'status-user-group-backend'))
@@ -43,6 +44,7 @@ if ($extensionConfiguration) {
         )
         ->addField(
             (new \StudioMitte\LiveSearchExtended\Configuration\Field('lastlogin', 'actions-clock'))
+                ->setSkipIfEmpty(true)
         )
         ->addField(
             (new \StudioMitte\LiveSearchExtended\Configuration\Field('usergroup', 'status-user-group-backend'))
