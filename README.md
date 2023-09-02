@@ -2,10 +2,10 @@
 
 [![TYPO3 12](https://img.shields.io/badge/TYPO3-12-orange.svg)](https://get.typo3.org/version/12)
 
-<p dir="auto"><a target="_blank" rel="noopener noreferrer" href="/studiomitte/live-search-extended/blob/main/Resources/Public/Examples/tx_news_domain_model_news.png"><img src="/studiomitte/live-search-extended/raw/main/Resources/Public/Examples/tx_news_domain_model_news.png" alt="Search result for EXT:news" style="max-width: 50%;"></a>
-<a target="_blank" rel="noopener noreferrer" href="/studiomitte/live-search-extended/blob/main/Resources/Public/Examples/fe_user.png"><img src="/studiomitte/live-search-extended/raw/main/Resources/Public/Examples/fe_user.png" alt="Search result for FE Users" style="max-width: 50%;"></a>
-<a target="_blank" rel="noopener noreferrer" href="/studiomitte/live-search-extended/blob/main/Resources/Public/Examples/sys_template.png"><img src="/studiomitte/live-search-extended/raw/main/Resources/Public/Examples/sys_template.png" alt="Search result for TS records" style="max-width: 50%;"></a>
-<a target="_blank" rel="noopener noreferrer" href="/studiomitte/live-search-extended/blob/main/Resources/Public/Examples/form.png"><img src="/studiomitte/live-search-extended/raw/main/Resources/Public/Examples/form.png" alt="Search result for EXT:form" style="max-width: 50%;"></a></p>
+![Search result for EXT:news](Resources/Public/Examples/tx_news_domain_model_news.png)
+![Search result for FE Users](Resources/Public/Examples/fe_user.png)
+![Search result for TS records](Resources/Public/Examples/sys_template.png)
+![Search result for EXT:form](Resources/Public/Examples/form.png)
 
 This extension improves the output of TYPO3's backend search of the top right corner which is called **Live Search** by:
 
