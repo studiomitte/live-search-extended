@@ -6,6 +6,7 @@ services:
 
   StudioMitte\LiveSearchExtended\:
     resource: '../Classes/*'
+    exclude: '../Classes/Provider/FormDataProvider.php'
 
   StudioMitte\LiveSearchExtended\EventListener\ModifyResultEventListener:
     tags:

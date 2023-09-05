@@ -11,7 +11,7 @@ This extension improves the output of TYPO3's backend search of the top right co
 
 - Appending the UID of the record to the title
 - Provide more information about the record in the result
-- Search for EXT:form records (upcoming version)
+- Search for EXT:form records
 
 Supported TYPO3 versions:
 
