@@ -32,19 +32,19 @@ There are 2 ways to configure the extension. Every configuration must be placed 
 
 ```php
 $configuration = new \StudioMitte\LiveSearchExtended\Configuration\Table('tx_news_domain_model_news');
-        $configuration
-            // Provide the field name and an icon identifier
-            ->addField(
-                (new \StudioMitte\LiveSearchExtended\Configuration\Field('datetime', 'actions-clock'))
-                    ->setSkipIfEmpty(true)
-                    ->setPrefixLabel(false)
-            )
-            ->addField(
-                (new \StudioMitte\LiveSearchExtended\Configuration\Field('teaser', 'actions-document'))
-                    ->setSkipIfEmpty(true)
-                    ->setPrefixLabel(false)
-            )
-            ->persist();
+$configuration
+    // Provide the field name and an icon identifier
+    ->addField(
+        (new \StudioMitte\LiveSearchExtended\Configuration\Field('datetime', 'actions-clock'))
+            ->setSkipIfEmpty(true)
+            ->setPrefixLabel(false)
+    )
+    ->addField(
+        (new \StudioMitte\LiveSearchExtended\Configuration\Field('teaser', 'actions-document'))
+            ->setSkipIfEmpty(true)
+            ->setPrefixLabel(false)
+    )
+    ->persist();
 ```
 
 ### Directly in TCA
